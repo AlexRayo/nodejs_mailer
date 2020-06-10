@@ -1,12 +1,17 @@
 const express = require('express');
 const app = express();
 const nodemailer = require('nodemailer');
+const path = require('path');
 
 // Settings
 const PORT = 3000;
 
 // Starting the server
-app.listen(PORT, () => console.log(`Server running on porst: ${PORT}`))
+app.listen(PORT, () => console.log(`Server running on porst: ${PORT}`));
+
+app.get('/',(req:any, res:any) => {
+    res.sendFile(path.join(__dirname, 'views','index.html'));
+});
 
 // Middlewares
 //app.use(express.json());
@@ -36,7 +41,7 @@ function sendMail(){
       //html: '<h1>Welcome</h1><p>That was easy!</p>'
     };
     
-    transporter.sendMail(mailOptions, function(error, info){
+    transporter.sendMail(mailOptions, function(error:any, info:any){
       if (error) {
         console.log(error);
       } else {
